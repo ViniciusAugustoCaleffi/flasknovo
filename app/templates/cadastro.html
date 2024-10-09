@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+  <h1>Cadastro</h1>
+
+  <form action="cadastrarUsuario" method="POST">
+    <label>Cpf</label>
+    <input type="text" name="cpf" id ="cpf"/><br><br>
+
+     <label>Nome:</label>
+    <input type="text" name="nome" id ="nome"/><br><br>
+
+     <label>Telefone</label>
+    <input type="text" name="telefone" id ="telefone"/><br><br>
+
+     <label>Endereço:</label>
+    <input type="text" name="endereco" id ="endereco"/><br><br>
+
+    <button>Cadastrar</button>
+  </form>
+  <a href="/listar">Consultar tudo</a><br><br>
+  <a href="/listarIndividual">Consultar Individual</a><br><br>
+  <a href="/atualizar">Atualizar</a><br><br>
+  <a href="/excluir">Excluir</a><br><br>
+
+{% endblock %}
