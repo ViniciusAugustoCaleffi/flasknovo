@@ -1,25 +1,39 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-  <h1>Cadastro</h1>
+<body>
+   <div class="form">
+    <div class="title">Cadastro de Usuário</div>
+    <div class="subtitle">Vamos criar sua conta!</div>
 
-  <form action="cadastrarUsuario" method="POST">
-    <label>Cpf</label>
-    <input type="text" name="cpf" id ="cpf"/><br><br>
+    <form action="cadastrarUsuario" method="POST">
+        <div class="input-container ic1">
+            <input placeholder="" type="text" class="input" id="cpf" name="cpf" required>
+            <div class="cut"></div>
+            <label class="iLabel" for="cpf">CPF</label>
+        </div>
 
-     <label>Nome:</label>
-    <input type="text" name="nome" id ="nome"/><br><br>
+        <div class="input-container ic2">
+            <input placeholder="" type="text" class="input" id="nome" name="nome" required>
+            <div class="cut"></div>
+            <label class="iLabel" for="nome">Nome</label>
+        </div>
 
-     <label>Telefone</label>
-    <input type="text" name="telefone" id ="telefone"/><br><br>
+        <div class="input-container ic2">
+            <input placeholder="" type="text" class="input" id="telefone" name="telefone" required>
+            <div class="cut"></div>
+            <label class="iLabel" for="telefone">Telefone</label>
+        </div>
 
-     <label>Endereço:</label>
-    <input type="text" name="endereco" id ="endereco"/><br><br>
+        <div class="input-container ic2">
+            <input placeholder="" type="text" class="input" id="endereco" name="endereco" required>
+            <div class="cut cut-short"></div>
+            <label class="iLabel" for="endereco">Endereço</label>
+        </div>
 
-    <button>Cadastrar</button>
-  </form>
-  <a href="/listar">Consultar tudo</a><br><br>
-  <a href="/listarIndividual">Consultar Individual</a><br><br>
-  <a href="/atualizar">Atualizar</a><br><br>
-  <a href="/excluir">Excluir</a><br><br>
+        <button class="submit" type="submit">Cadastrar</button>
+    </form>
+</div>
+
+</body>
 
 {% endblock %}
