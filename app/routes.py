@@ -29,21 +29,38 @@ def cadastrarUsuarios():
     except Exception as e:
         return f'Ocorreu um erro \n+ {e}'
 
-@app.route ('/listar')
-def listarTudo():
-    try:
-        requisicao = requests.get(f'{link}/cadastro/.json')
-        dicionario = requisicao.json()
-        return dicionario
-    except Exception as e:
-        return f'Algo deu errado \n+ {e}'
+@app.route('/listarIndividual', methods=['GET', 'POST'])
+def listarPorCpf():
+    if request.method == 'GET':
+        return render_template('listar.html', titulo="Listar Usuário")
 
-@app.route ('/listarIndividual')
-def listarIndividual():
+    if request.method == 'POST':
+        try:
+            cpf = request.form.get("cpf")
+
+            requisicao = requests.get(f'{link}/cadastro/.json')
+            dicionario = requisicao.json()
+
+            usuario_encontrado = None
+            for codigo in dicionario:
+                if dicionario[codigo]['cpf'] == cpf:
+                    usuario_encontrado = dicionario[codigo]
+                    break
+
+            if not usuario_encontrado:
+                return f"CPF {cpf} não encontrado."
+
+            return usuario_encontrado
+
+        except Exception as e:
+            return f"Algo deu errado: {e}"
+
+@app.route ('/listar')
+def listar():
     try:
         requisicao = requests.get(f'{link}/cadastro/.json')
         dicionario = requisicao.json()
-        idCadastro = "" #Coletar id
+        idCadastro = ""
         for codigo in dicionario:
             chave = dicionario[codigo]['cpf']
             if chave == '12321312231':
@@ -53,15 +70,47 @@ def listarIndividual():
     except Exception as e:
         return f'Algo deu errado \n+ {e}'
 
-@app.route ('/atualizar')
 
+@app.route('/atualizar', methods=['GET', 'POST'])
 def atualizar():
-    try:
-        dados = {"nome": "joão"}
-        requisicao = requests.patch(f'{link}/cadastro/-O8miHXi41Az4ljED92S.json', data = json.dumps(dados))
-        return "atualizado com sucesso!"
-    except Exception as e:
-        return f'Algo deu errado \n+ {e}'
+    if request.method == 'GET':
+        return render_template('atualizar.html', titulo="Atualizar Usuário")
+
+    if request.method == 'POST':
+        try:
+            cpf = request.form.get("cpf")
+            novo_nome = request.form.get("nome")
+            novo_telefone = request.form.get("telefone")
+            novo_endereco = request.form.get("endereco")
+
+
+            requisicao = requests.get(f'{link}/cadastro/.json')
+            dicionario = requisicao.json()
+
+            idCadastro = None
+            for codigo in dicionario:
+                if dicionario[codigo]['cpf'] == cpf:
+                    idCadastro = codigo
+                    break
+
+            if not idCadastro:
+                return f" CPF {cpf} não encontrado.",
+
+            dados_atualizados = {
+                "nome": novo_nome,
+                "telefone": novo_telefone,
+                "endereco": novo_endereco
+            }
+            requisicao_atualizacao = requests.patch(f'{link}/cadastro/{idCadastro}.json',
+                                                    data=json.dumps(dados_atualizados))
+
+            if requisicao_atualizacao.status_code == 200:
+                return "Atualizado com sucesso!"
+            else:
+                return f"Erro ao atualizar: {requisicao_atualizacao.text}"
+
+        except Exception as e:
+            return f"Algo deu errado: {e}"
 
 
 @app.route ('/excluir')

@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
 {% block conteudo %}
-  <h1>Pagina Inicial</h1>
-<style>
-  h1{
-    text-align: center;
-  }
-</style>
-  <button><a href="/listar">Consultar tudo</a><br><br> </button><BR><BR>
-  <button><a href="/listarIndividual">Consultar Individual</a><br><br> </button><BR><BR>
-  <button><a href="/atualizar">Atualizar</a><br><br> </button><BR><BR>
-  <button><a href="/excluir">Excluir</a><br><br> </button><BR><BR>
+  <h1>Consultar dados Academia</h1>
+
+ <div class="button-container">
+        <button><a href="/listar">Consultar tudo</a></button>
+        <button><a href="/listarIndividual">Consultar Individual</a></button>
+        <button><a href="/atualizar">Atualizar</a></button>
+        <button><a href="/excluir">Excluir</a></button>
+ </div>
+
 {% endblock %}

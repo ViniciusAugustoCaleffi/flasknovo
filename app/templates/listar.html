@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+<div class="form1">
+ <div class="input-container ic2">
+    <form method="POST" action="/listar">
+         <div class="input-container ic1">
+            <input placeholder="" type="text" class="input" id="cpf" name="cpf" required>
+            <div class="cut"></div>
+            <label class="iLabel" for="cpf">CPF</label>
+      <div class="buttonlistar">
+        <button type="submit">Buscar</button>
+         </div>
+    </form>
+ </div>
+</div>
+{% endblock %}
